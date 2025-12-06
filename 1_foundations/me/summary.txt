@@ -1,2 +1,62 @@
-My name is Ed Donner. I'm an entrepreneur, software engineer and data scientist. I'm originally from London, England, but I moved to NYC in 2000.
-I love all foods, particularly French food, but strangely I'm repelled by almost all forms of cheese. I'm not allergic, I just hate the taste! I make an exception for cream cheese and mozarella though - cheesecake and pizza are the greatest.
+My name is Yanki Markovich. I'm tema leader, and software engineer. I am prepering for my new role which is tech leader with AI. I'm originally from Bnei-Brak, Israel, but I moved to Modiin in 2021.
+I love all foods, particularly the ones including good meat inside. I love to BBQ.
+I an asinger song writer, i have my artist page in all music platforms.
+I am divorced. my 3 lovely kids spend half time with me.
+I am in age 40.
+
+this is my CV:
+
+Yanki Markovich
+Team Lead | Backend & Client Developer | Cloud Development
+📍 Israel | 📧 yankim4@gmail.com | 📞 0504281978 
+Professional Summary
+Engineering leader with 8 years of software development and 6 years of team management (including QA). Currently leading a cross-functional team of 4 React Native developers and 1 backend developer at Pepper Bank/Leumi, delivering large-scale digital banking applications under aggressive deadlines.
+Strong background in Node.js, AWS (Lambda, AppSync, DynamoDB, RDS, CDK, S3, Secrets Manager), SQL/NoSQL databases, and microservices architectures. Experience with complex system integrations and empowering teams for professional growth.
+Recognized as 2024 Outstanding Employee (Digital & Open Banking, Bank Leumi).
+Professional Experience
+Team Lead – Client & Backend Development
+Pepper Bank (part of Leumi Digital Division) | 2024–Present
+• Managed a team of 4 React Native developers and 1 backend developer on critical banking projects.
+• Led my team within the Pepper migration to Leumi’s core systems, taking major part in a BFF layer development using Aws: Lambda, AppSync, DynamoDB, RDS (MySQL), S3, CDK, Secrets
+• Built microservices in Node.js/Express 
+• Database PoCs and implementations -> DynamoDB, Sequelize ORM with RDS
+• Developing complex features myself
+• Engaging process, delivery, and quality improvements in my team.
+• Mentoring developers to be more proactive and creative, and building tools that makes development proccess bettet.
+• Entered client development myself (React Native) to manage more effectively – fix bugs and performing code reviews.
+• Led emergency Zoom sessions with dozens of participants to resolve production incidents (e.g., login failures)                           
+• Leading complex integrations for big banking features in front of Leumi core systems 
+
+Key Achievements:
+• Delivering major features in a new banking application on time under extreme deadlines.
+• Awarded Outstanding Employee of the Year 2024 by Leumi Digital Division.
+• Improved team performance and morale by structuring workflows and communication.
+
+Backend Developer
+Pepper Bank | 2022–2023
+• Developed in Node.js on an existing monolith.
+• Worked with MongoDB and MySQL, optimized performance, and implemented financial logic.
+Fullstack Developer
+Leverate – Financial Trading Technology | 2018–2021
+• Backend development with C# .NET.
+• Developed services with real time market data feeds.
+• Added features to web admin using react
+• Worked with SQL, MySQL, PostgreSQL, MongoDB.
+QA Team Lead | QA Engineer
+Leverate – Financial Trading Technology | 2012–2017
+• Managed a QA team of 4 testers on trading applications.
+• Responsible testing processes, release quality, and coordination with development teams.
+• Initially a QA Engineer testing complex trading systems.
+QA Engineer
+Mobixell Networks | 2010–2011
+• Tested and validated network and telecom solutions.
+Education
+B.Sc. Computer Science & Mathematics – Ariel University | 2008–2011
+Core Skills
+Backend & Cloud: Node.js, Express, C# .NET, AWS (Lambda, AppSync, DynamoDB, RDS, CDK, S3, Secrets Manager), Kafka, MongoDB, MySQL, PostgreSQL, Sequelize ORM, Mongoose.
+Frontend: React web, React native (basic experience – supporting my management, bug fixing, adding features).
+Architecture & Processes: Microservices, BFF, GraphQL, OpenAPI/Swagger, CI, performance optimization, Agile/Scrum.                                                        Leadership: Team management, mentoring, delivery under pressure, proactivity
+Tools: Git, Jira, TFS.
+Languages
+Hebrew – Native
+English – Fluent
