@@ -1,1 +1,229 @@
-My name is Yanki Markovich. I am software engineer and team leader. 
+Story of the Last Two Years
+2024–2025
+For the past year and a half, I’ve been the team lead of four client developers in React Native and one backend developer.
+I come from a back-end background, but I am a full stack developer who takes hands-on missions on my own.
+I successfully managed the team during two large projects with very tight deadlines.
+
+First Project: Migration of Pepper Bank to Leumi’s Core Systems
+The first project was the migration of Pepper Bank from working with its own independent core system to working with Leumi Bank’s core systems.
+In practice, all Pepper’s data was migrated into Leumi’s databases, only with Pepper’s branding.
+It was a huge project across the entire bank, but especially for us, since we were responsible for developing a new application and building a BFF (Backend for Frontend) server that fetches data via complex flows from the core systems.
+Together with our group manager, I managed the complex tasks under tough deadlines.
+We had to take an AWS training course to quickly learn how to use the AWS resources required for developing the BFF:
+Lambda, AppSync, S3, DynamoDB, RDS, CDK, Secrets Manager
+And more
+For the data logic and organization in the format needed by the client, we used Lambdas written in NodeJS
+(The APIs were exposed to the client through AppSync, which is AWS’s GraphQL product, and not the regular REST API
+Looking back, we regretted this choice, but by then it was too late to change course due to deadlines. The regret came from the fact that GraphQL’s schemas are not strong enough.
+We worked with DCS (Digital Core Services), which uses OpenAPI (Swagger) validations—very strict schema validations. GraphQL lacks such strong schema validations, which causes gaps and bugs.
+Another issue was that GraphQL allows data aggregation (for example, fetching a list of savings accounts along with details for each in one request), giving the client control to decide what data to request.
+While this reduces traffic in theory, in practice the disadvantages outweighed the advantages for our project. Unfortunately, it was too late to switch.)
+
+
+Complex Integrations with Leumi Systems
+We didn’t connect directly to Leumi’s cores, but via Digital Core Services (DCS), which exposed data from Leumi’s cores.
+However, the integrations were our responsibility—and they were tough.
+We had to integrate with many systems and teams. To them, Pepper was “just a small detail” in the big picture, and often we were treated as a nuisance.
+Some integrations went smoothly with responsive partners, others required chasing people, escalating to project managers, and pushing hard.
+Still, my persistence and initiative ensured successful integrations.
+The integrations I managed included:
+* Open banking
+* Bank transfers
+* Direct debit authorizations
+* Core events
+* Leumi Trade
+And more
+
+
+Homepage Development
+I was responsible for developing the homepage.
+Product’s requirement was a homepage built of widgets, giving customers control over their data.
+Widgets included credit cards, savings, recent transactions, and aggregations of similar transactions.
+I took full ownership of this development.
+I did a POC to choose the right database. DynamoDB was ideal, but security restrictions (later relaxed) forced us to use a GATEWAY for data processing and encryption/decryption. Leumi’s encryption vendor didn’t support DynamoDB, so I ultimately chose MySQL on RDS. (Mysql is a known DB. RDS is seating on the cloud, Mysql was more familiar than postgres)
+I did a POC for ORM(Object-Relational Mapper) and decided to use Sequelize for its popularity and ease of use.
+I built a shared code layer with a generic class for database access via Sequelize, created the tables, and implemented customer widget management (create, update, delete).
+I also built the Lambdas that use this class.
+For non-sensitive data, we used DynamoDB—for example:
+* Basic customer indicators
+* Bank list
+* Institution list
+* Large mappings between Leumi data and Pepper data (frequently updated, unsuitable for hardcoding)
+
+
+
+Institution List Challenge
+The institution list was large, and loading it took a long time. I didnt like it because it was a bad UX. So I went to the product to raise this issue. After I got their acceptance and blessings I started to research what is the best way to implement online search rather than fetching the full list to search locally on the client, since that took too long.
+Initially, we couldn’t implement it due to lack of time. Later, I led a brainstorm with all relevant stakeholders (architects, etc.) to solve it.
+We considered S3-based solutions and in-memory caching with efficient querying.
+In the end, we decided that the DCS layer would handle caching and searching, while we just sent queries.
+The leadership and initiative—from the initial unmet requirement to a fully working solution—was mine.
+
+
+
+
+Two Microservices I Built Myself
+Both in Node.js with Express:
+1. Proxy Service:
+    * When DCS didn’t expose certain data, we had to connect directly to the vendor's system.  In General DCS is our layer of data from pure LEUMI CORE SYSTEMS.
+In some cases when its not pure core system like open banking for example, 
+The decision was to work in front of the core systems by our selves.
+    * I built a proxy microservice in the DCS layer using http-proxy-middleware.
+    * The proxy rewrote base URLs and forwarded calls, handling required logic with minimal code.
+2. On-Prem Microservice:
+    * Part of a two-service architecture. One consumed Kafka events and wrote them to MongoDB.
+    * The second (which I built) fetched data from MongoDB using Mongoose and exposed APIs via Express Router.
+
+
+
+Recognition
+When the migration project ended, I received an Excellence Award from Bank Leumi.
+Pepper is a large sub-division of Leumi’s Digital & Open Banking department, and each year one person per sub-division is chosen.
+I won for 2024 for employee of the year.
+
+
+
+
+
+
+
+
+
+
+Second Project: New App Development
+After release, customers preferred the old app. The new one was heavier and less appealing to Pepper’s young audience.
+After a research of the product and a lot of non development departments in pepper -> Six months later, a new app was greenlit—with a 4-month deadline, as competitors like Revolut and ESH were launching.
+
+
+Team Development & Mentorship
+
+
+This was chaos:
+* Design specs changed constantly without updating Figma.
+* QA opened bugs for mismatches between Figma and actual builds.
+* Product sat with developers, updating them live without proper specs.
+* Stress was huge, and many overtime hours were required.
+
+The backend stayed the same, but UI was rebuilt in React Native.
+We reused business logic, redeveloping only UI components.
+
+I managed my team through the pressure, shielding them from chaos:
+* I set rules: product could not approach developers directly. All bug/task requests went through me or the Project Manager.
+* Every bug was filtered by me before assignment.
+* Developers gave me feedback that this structure reduced their stress significantly.
+
+I mentored a developer who previously (in another team) received poor reviews.
+With my guidance, he became:
+* Proactive and professional
+* A go-to person for advice
+* Leader of automation infrastructure
+We did not have unit tests on the server side. And with my guidance he managed to develop automation infrastructure from scratch, using technologies like JEST and PRISM
+* Builder of a shared mock environment for devs and QA (reducing dependency on backend developers)
+* Owner of complex Leumi integrations
+I achieved this by pushing him to take ownership, supporting him closely, and encouraging him to ask questions and engage confidently with others.
+
+Hands-On Client-Side Development
+As a backend lead managing client developers, I set a goal to learn React Native.
+When deadlines were tight, I jumped in, pulled the client repo, learned React on the fly, and fixed bugs myself.
+Now I can even perform code reviews for client developers—all while handling the massive workload.
+
+
+
+
+Reducing Duplicate Calls in the New App
+We agreed not to repeat past mistakes with duplicate backend calls.
+Homepage would fetch most relevant data, and inner pages should reuse it.
+But under stress, client developers sometimes ignored this.
+I tracked all duplicate calls, documented them, and posted a detailed message to management.
+This led to a cross-team meeting where each lead was tasked to fix their team’s duplicates—initiated thanks to my report.
+
+Production Incidents
+In major outages (e.g., login failures), I led Zoom war rooms with dozens of participants until resolution.
+
+Joint & Multi-Account Support
+Last year, we added joint/multi-account support.
+* A field in user data indicated account type (personal or joint).
+* This came from the Onboarding system.
+* We also maintained a DynamoDB table for each user’s preferred account (present and future).
+During one production issue, I led analysis sessions and discovered that the Onboarding system was sending invalid values not in the enum, causing missing fallbacks.
+In addition i took the responsibility to fix the user data my self call in a way there will always be fallback. When there is a problem -> take the personal account as fallback.
+
+
+
+User Data Redesign
+Due to the rushed migration project, user data was poorly designed.
+We were 4 developers teams working on the the same code and not always everyone made the best choices, which led to the followings:
+Each customer had multiple IDs—account number, customer ID, user ID, etc. With joint/multi-accounts, it became messy, and the schema returned to clients was confusing and risky.
+For the new app (also under tight deadlines), I insisted on redesigning user data to provide a single source of truth for identifiers, ensuring client developers couldn’t make mistakes.
+
+
+
+
+Yanki Markovich Currnet CV:
+
+Yanki Markovich
+Team Lead | Backend & Client Developer | Cloud Development
+📍 Israel | 📧 yankim4@gmail.com | 📞 0504281978 
+Professional Summary
+Engineering leader with 8 years of software development and 6 years of team management (including QA). Currently leading a cross-functional team of 4 React Native developers and 1 backend developer at Pepper Bank/Leumi, delivering large-scale digital banking applications under aggressive deadlines.
+Strong background in Node.js, AWS (Lambda, AppSync, DynamoDB, RDS, CDK, S3, Secrets Manager), SQL/NoSQL databases, and microservices architectures. Experience with complex system integrations and empowering teams for professional growth.
+Recognized as 2024 Outstanding Employee (Digital & Open Banking, Bank Leumi).
+Professional Experience
+Team Lead – Client & Backend Development
+Pepper Bank (part of Leumi Digital Division) | 2024–Present
+• Managed a team of 4 React Native developers and 1 backend developer on critical banking projects.
+• Led my team within the Pepper migration to Leumi’s core systems, taking major part in a BFF layer development using Aws: Lambda, AppSync, DynamoDB, RDS (MySQL), S3, CDK, Secrets
+• Built microservices in Node.js/Express 
+• Database PoCs and implementations -> DynamoDB, Sequelize ORM with RDS
+• Developing complex features myself
+• Engaging process, delivery, and quality improvements in my team.
+• Mentoring developers to be more proactive and creative, and building tools that makes development proccess bettet.
+• Entered client development myself (React Native) to manage more effectively – fix bugs and performing code reviews.
+• Led emergency Zoom sessions with dozens of participants to resolve production incidents (e.g., login failures)                           
+• Leading complex integrations for big banking features in front of Leumi core systems 
+
+Key Achievements:
+• Delivering major features in a new banking application on time under extreme deadlines.
+• Awarded Outstanding Employee of the Year 2024 by Leumi Digital Division.
+• Improved team performance and morale by structuring workflows and communication.
+
+Backend Developer
+Pepper Bank | 2022–2023
+• Developed in Node.js on an existing monolith.
+• Worked with MongoDB and MySQL, optimized performance, and implemented financial logic.
+Fullstack Developer
+Leverate – Financial Trading Technology | 2018–2021
+• Backend development with C# .NET.
+• Developed services with real time market data feeds.
+• Added features to web admin using react
+• Worked with SQL, MySQL, PostgreSQL, MongoDB.
+QA Team Lead | QA Engineer
+Leverate – Financial Trading Technology | 2012–2017
+• Managed a QA team of 4 testers on trading applications.
+• Responsible testing processes, release quality, and coordination with development teams.
+• Initially a QA Engineer testing complex trading systems.
+QA Engineer
+Mobixell Networks | 2010–2011
+• Tested and validated network and telecom solutions.
+Education
+B.Sc. Computer Science & Mathematics – Ariel University | 2008–2011
+Core Skills
+Backend & Cloud: Node.js, Express, C# .NET, AWS (Lambda, AppSync, DynamoDB, RDS, CDK, S3, Secrets Manager), Kafka, MongoDB, MySQL, PostgreSQL, Sequelize ORM, Mongoose.
+Frontend: React web, React native (basic experience – supporting my management, bug fixing, adding features).
+Architecture & Processes: Microservices, BFF, GraphQL, OpenAPI/Swagger, CI, performance optimization, Agile/Scrum.                                                        Leadership: Team management, mentoring, delivery under pressure, proactivity
+Tools: Git, Jira, TFS.
+Languages
+Hebrew – Native
+English – Fluent
+
+
+
+
+More about Yanki Markovich:
+https://www.youtube.com/@YankiMarkovich
+https://open.spotify.com/artist/0dVlB2aS0UcMznO2CJyYW6?si=YO0oOwjAT763O59iYjFg5w
+https://www.kikar.co.il/singles-clips/300196
+https://www.kikar.co.il/singles-clips/291121
+https://www.kikar.co.il/singles-clips/285132
+https://www.kikar.co.il/singles-clips/276264
+https://www.facebook.com/yankim4
